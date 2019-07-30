@@ -17,6 +17,11 @@ form {
     padding: 20px;
 }
 
+#animal-result img{
+    margin: 5px;
+    vertical-align: top;
+}
+
 .container {
     color: #d1e065;
     padding: 70px;

@@ -16,19 +16,40 @@ function renderButtons() {
     }
 }
 
+function renderImages(response) {
+    var displayAnimals = response
+    console.log(response)
+    $('#animal-result').empty()
+    for (var i = 0; i < displayAnimals.data.length; i++) {
+
+        // var rating = displayAnimals.data[i].rating;
+        // var pTag = $('<p>').text('Rating: ' + rating);
+        // var gifAnimals = $('<img>').attr('src', displayAnimals.data[i].images["480w_still"].url) 
+        var gifAnimals = $('<img>')
+        .attr('src', displayAnimals.data[i].images.fixed_width.url)
+        .attr('data-animate', displayAnimals.data[i].images.fixed_width.url)
+        .attr('data-still', displayAnimals.data[i].images.fixed_width_still.url)
+        .attr('data-isanimate', true)
+        .addClass('gif')
+        
+
+        // console.log(gifAnimals);
+        $('#animal-result').append(gifAnimals)
+    }
+}
+
 //When button is cliclked, this function will handle the events
-$('#add-animal').on('click', function () {
-
-    var favAnimal = $('#animal-input').val()
-    animals.push(favAnimal)
-    $('#animal-input').val('')
-
+$('.add-animal').on('click', function () {
     //Prevent the page from refreshing
     event.preventDefault();
 
+    var favAnimal = $('.animal-input').val()
+    animals.push(favAnimal)
+    $('.animal-input').val('')
+
+
     renderButtons()
 })
-
 
 $(document).on('click', '.animal', function () {
     var animalName = $(this).attr('data-name')
@@ -42,24 +63,9 @@ $(document).on('click', '.animal', function () {
         url: queryUrl,
         method: 'GET'
     }).then(function (response) {
-
-        var displayAnimals = response
-        console.log(response)
-        for (var i = 0; i < displayAnimals.data.length; i++) {
-            // var gifAnimals = $('<img>').attr('src', displayAnimals.data[i].images["480w_still"].url)       
-            // var rating = displayAnimals.data[i].rating;
-            // var pTag = $('<p>').text('Rating: ' + rating);
-            var gifAnimals = $('<img>').attr('src', displayAnimals.data[i].images.downsized.url)
-            console.log(gifAnimals);
-            $('#animal-result').append(gifAnimals)
-        }
-
+        renderImages(response)
     })
 });
-
-
-
-
 
 renderButtons()
 
