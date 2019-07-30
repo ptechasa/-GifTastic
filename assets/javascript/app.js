@@ -16,5 +16,12 @@ function renderButtons() {
     }
 }
 
+$('#add-animal').on('click', function(){
+    event.preventDefault();
+
+    var favAnimal = $('#animal-input').val().trim()
+    animals.push(favAnimal)
+    renderButtons()
+})
 renderButtons()
 
