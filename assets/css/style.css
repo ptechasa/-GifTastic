@@ -1,6 +1,6 @@
 body {
-    /* background-image: url(../images/zoo.jpg); */
-    background-color: rgb(71, 67, 67);
+    background-image: url(../images/animal.jpg);
+    /* background-color: rgb(71, 67, 67); */
     background-size: 1440px 800px;
 	background-position: cover;
  	display: compact;
@@ -17,15 +17,24 @@ form {
     padding: 20px;
 }
 
-#animal-result img{
-    margin: 5px;
-    vertical-align: top;
+input[type="text"] {
+    width: 180px;
+    border-radius: 6px;
+    padding: 5px;
 }
 
 .container {
-    color: #d1e065;
+    color: #534d2d;
     padding: 70px;
     margin: 80px;
+}
+
+.item {
+    display: inline-block;
+    background-color: yellow;
+    padding: 10px;
+    margin: 10px;
+    vertical-align: top;
 }
 
 #add-animal {

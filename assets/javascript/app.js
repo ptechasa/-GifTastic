@@ -22,19 +22,21 @@ function renderImages(response) {
     $('#animal-result').empty()
     for (var i = 0; i < displayAnimals.data.length; i++) {
 
-        // var rating = displayAnimals.data[i].rating;
-        // var pTag = $('<p>').text('Rating: ' + rating);
-        // var gifAnimals = $('<img>').attr('src', displayAnimals.data[i].images["480w_still"].url) 
+        //display rating from GIPHY API
+        var divTag = $('<div>').addClass('item')
+        var rating = displayAnimals.data[i].rating
+        var pTag = $('<p>').text('Rating: ' + rating)
+
         var gifAnimals = $('<img>')
-        .attr('src', displayAnimals.data[i].images.fixed_width.url)
-        .attr('data-animate', displayAnimals.data[i].images.fixed_width.url)
-        .attr('data-still', displayAnimals.data[i].images.fixed_width_still.url)
-        .attr('data-isanimate', true)
-        .addClass('gif')
-        
+            .attr('src', displayAnimals.data[i].images.fixed_width.url)
+            .attr('data-animate', displayAnimals.data[i].images.fixed_width.url)
+            .attr('data-still', displayAnimals.data[i].images.fixed_width_still.url)
+            .attr('data-isanimate', true)
+            .addClass('gif')
 
         // console.log(gifAnimals);
-        $('#animal-result').append(gifAnimals)
+        divTag.append(gifAnimals, pTag)
+        $('#animal-result').append(divTag)
     }
 }
 
@@ -46,7 +48,6 @@ $('.add-animal').on('click', function () {
     var favAnimal = $('.animal-input').val()
     animals.push(favAnimal)
     $('.animal-input').val('')
-
 
     renderButtons()
 })
@@ -65,6 +66,26 @@ $(document).on('click', '.animal', function () {
     }).then(function (response) {
         renderImages(response)
     })
+});
+
+$(document).on('click', '.gif', function () {
+    console.log(this)
+    var isAnimate = $(this).attr('data-isanimate')
+
+    //the image is animated, if user clicks the gif, it should stop playing
+    if (isAnimate == 'true') {
+        var animateStill = $(this).attr('data-still')
+        $(this).attr('src', animateStill)
+        $(this).attr('data-isanimate', false)
+
+        //Once user clicks one of the still GIPHY images, the gif should animate. 
+    } else if (isAnimate != 'true') {
+        var dataAnimate = $(this).attr('data-animate')
+        $(this).attr('src', dataAnimate)
+        $(this).attr('data-isanimate', true)
+
+    }
+
 });
 
 renderButtons()
