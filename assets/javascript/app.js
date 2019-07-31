@@ -3,7 +3,7 @@ var animals = ["beaver", "rhinoceros", "elephant", "tiger", "rabbit", "frog", "S
 function renderButtons() {
     $('.button-view').empty();
 
-    //generating the button for each animal in the array
+    //creating new buttons for each animal in array
     for (var i = 0; i < animals.length; i++) {
 
         var createBtn = $('<button>')
@@ -11,7 +11,6 @@ function renderButtons() {
         createBtn.attr('data-name', animals[i])
         createBtn.addClass('animal')
 
-        //adding the button to HTML
         $('.button-view').append(createBtn)
     }
 }
@@ -27,6 +26,7 @@ function renderImages(response) {
         var rating = displayAnimals.data[i].rating
         var pTag = $('<p>').text('Rating: ' + rating)
 
+        //
         var gifAnimals = $('<img>')
             .attr('src', displayAnimals.data[i].images.fixed_width.url)
             .attr('data-animate', displayAnimals.data[i].images.fixed_width.url)
@@ -45,11 +45,17 @@ $('.add-animal').on('click', function () {
     //Prevent the page from refreshing
     event.preventDefault();
 
-    var favAnimal = $('.animal-input').val()
-    animals.push(favAnimal)
-    $('.animal-input').val('')
+    //create alert when user is not fill in the box
+    if ($('.animal-input').val().trim() == '') {
+        alert('Please input your favorite animal')
 
+    } else {
+        var favAnimal = $('.animal-input').val()
+        animals.push(favAnimal)
+        $('.animal-input').val('')
+    }
     renderButtons()
+    return false;
 })
 
 $(document).on('click', '.animal', function () {
@@ -60,6 +66,7 @@ $(document).on('click', '.animal', function () {
     var apiKey = '&api_key=4HU9iEgwZEeC5VzHUYuIa0w3TIroBsCg';
     var queryUrl = 'http://api.giphy.com/v1/gifs/search?q=' + animalName + apiKey;
 
+    //creating an AJAX call
     $.ajax({
         url: queryUrl,
         method: 'GET'
@@ -72,13 +79,13 @@ $(document).on('click', '.gif', function () {
     console.log(this)
     var isAnimate = $(this).attr('data-isanimate')
 
-    //the image is animated, if user clicks the gif, it should stop playing
+    //when user clicks the gif, it stops playing
     if (isAnimate == 'true') {
         var animateStill = $(this).attr('data-still')
         $(this).attr('src', animateStill)
         $(this).attr('data-isanimate', false)
 
-        //Once user clicks one of the still GIPHY images, the gif should animate. 
+        //Once user clicks one of the still GIPHY images, the gif will animate. 
     } else if (isAnimate != 'true') {
         var dataAnimate = $(this).attr('data-animate')
         $(this).attr('src', dataAnimate)
