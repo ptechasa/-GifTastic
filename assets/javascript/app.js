@@ -1,7 +1,7 @@
-var animals = ["beaver", "bird", "elephant", "tiger", "rabbit"]
+var animals = ["beaver", "rhinoceros", "elephant", "tiger", "rabbit", "frog", "Shark", "Donkey", "Chipmunk", "Kangaroo"]
 
 function renderButtons() {
-    $('#button-view').empty();
+    $('.button-view').empty();
 
     //generating the button for each animal in the array
     for (var i = 0; i < animals.length; i++) {
@@ -12,7 +12,7 @@ function renderButtons() {
         createBtn.addClass('animal')
 
         //adding the button to HTML
-        $('#button-view').append(createBtn)
+        $('.button-view').append(createBtn)
     }
 }
 
@@ -22,7 +22,7 @@ function renderImages(response) {
     $('#animal-result').empty()
     for (var i = 0; i < displayAnimals.data.length; i++) {
 
-        //display rating from GIPHY API
+        //display rating for each GIPHY API
         var divTag = $('<div>').addClass('item')
         var rating = displayAnimals.data[i].rating
         var pTag = $('<p>').text('Rating: ' + rating)
