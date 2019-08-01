@@ -18,6 +18,8 @@ function renderButtons() {
 function renderImages(response) {
     var displayAnimals = response
     console.log(response)
+
+    //clear the box before adding new one
     $('#animal-result').empty()
     for (var i = 0; i < displayAnimals.data.length; i++) {
 
@@ -26,7 +28,6 @@ function renderImages(response) {
         var rating = displayAnimals.data[i].rating
         var pTag = $('<p>').text('Rating: ' + rating)
 
-        //
         var gifAnimals = $('<img>')
             .attr('src', displayAnimals.data[i].images.fixed_width.url)
             .attr('data-animate', displayAnimals.data[i].images.fixed_width.url)
@@ -64,7 +65,10 @@ $(document).on('click', '.animal', function () {
 
     //URL with API request
     var apiKey = '&api_key=4HU9iEgwZEeC5VzHUYuIa0w3TIroBsCg';
-    var queryUrl = 'http://api.giphy.com/v1/gifs/search?q=' + animalName + apiKey;
+    
+    //limit Gif to display only 10
+    var limitGif = 10
+    var queryUrl = 'http://api.giphy.com/v1/gifs/search?q=' + animalName + "&limit=" + limitGif + apiKey;
 
     //creating an AJAX call
     $.ajax({
