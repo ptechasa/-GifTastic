@@ -56,7 +56,6 @@ $('.add-animal').on('click', function () {
         $('.animal-input').val('')
     }
     renderButtons()
-    return false;
 })
 
 $(document).on('click', '.animal', function () {
@@ -68,7 +67,7 @@ $(document).on('click', '.animal', function () {
     
     //limit Gif to display only 10
     var limitGif = 10
-    var queryUrl = 'http://api.giphy.com/v1/gifs/search?q=' + animalName + "&limit=" + limitGif + apiKey;
+    var queryUrl = 'https://api.giphy.com/v1/gifs/search?q=' + animalName + "&limit=" + limitGif + apiKey;
 
     //creating an AJAX call
     $.ajax({
