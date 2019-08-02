@@ -2,8 +2,7 @@ body {
     background-image: url(../images/animal.jpg);
     background-size: 1440px 800px;
     font-family: 'Love Ya Like A Sister', cursive;
-    padding: 20px;
-    margin-left: 20px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -11,7 +10,7 @@ h1 {
     text-align: center;
     margin-bottom: 40px;
     font-family: 'Baloo Bhaina', cursive;
-    color: #744d09
+    color: #744d09;
 }
 
 div {
@@ -38,8 +37,6 @@ label {
 
 .container {
     color: #744d09;
-    /* padding: 70px; */
-    margin: 50px;
 }
 
 .item {
@@ -85,4 +82,9 @@ label {
     background-color: #ffc107;
     padding-top: 10px;
    	text-align: center;
+}
+
+.item img {
+    width: 300px;
+    height: 230px;
 }
